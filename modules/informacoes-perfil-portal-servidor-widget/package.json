@@ -1,0 +1,22 @@
+{
+  "name": "informacoes-perfil-portal-servidor-widget",
+  "version": "1.0.0",
+  "description": "Informacoes Perfil Portal Servidor Widget",
+  "dependencies": {
+    "@liferay/dxp-7.4": "*",
+    "axios": "^0.27.2"
+  },
+  "portlet": {
+    "com.liferay.portlet.display-category": "category.sample",
+    "com.liferay.portlet.header-portlet-css": "/css/styles.css",
+    "com.liferay.portlet.instanceable": true,
+    "javax.portlet.name": "informacoesperfilportalservidorwidget",
+    "javax.portlet.security-role-ref": "power-user,user",
+    "javax.portlet.resource-bundle": "content.Language"
+  },
+  "scripts": {
+    "build": "liferay build",
+    "clean": "liferay clean",
+    "deploy": "liferay deploy"
+  }
+}

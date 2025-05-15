@@ -1,0 +1,25 @@
+{
+  "name": "ferias-react-widget",
+  "version": "1.0.0",
+  "description": "Ferias React Widget",
+  "dependencies": {
+    "@liferay/dxp-7.4": "*",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.48",
+    "react-big-calendar": "^0.33.6",
+    "react-router-dom": "^5.3.4"
+  },
+  "portlet": {
+    "com.liferay.portlet.display-category": "category.sample",
+    "com.liferay.portlet.header-portlet-css": "/css/styles.css",
+    "com.liferay.portlet.instanceable": true,
+    "javax.portlet.name": "feriasreactwidget",
+    "javax.portlet.security-role-ref": "power-user,user",
+    "javax.portlet.resource-bundle": "content.Language"
+  },
+  "scripts": {
+    "build": "liferay build",
+    "clean": "liferay clean",
+    "deploy": "liferay deploy"
+  }
+}

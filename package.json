@@ -1,0 +1,16 @@
+{
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "modules\\abrir-demandas-react-widget",
+            "modules\\admin-react-widget",
+            "modules\\cadastro-portal-servidor-react-widget",
+            "modules\\calendario-react-widget",
+            "modules\\esqueceu-senha-portal-servidor-react-widget",
+            "modules\\ferias-react-widget",
+            "modules\\informacoes-perfil-portal-servidor-widget",
+            "modules\\login-portal-servidor-react-widget",
+            "modules\\perfil-portal-servidor-react-widget"
+        ]
+    }
+}

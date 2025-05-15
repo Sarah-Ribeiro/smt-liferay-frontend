@@ -1,0 +1,23 @@
+{
+  "name": "perfil-portal-servidor-react-widget",
+  "version": "1.0.0",
+  "description": "Perfil Portal Servidor React Widget",
+  "dependencies": {
+    "@liferay/dxp-7.4": "*",
+    "axios": "^0.27.2", 
+    "react-router-dom": "^6.0.0"
+  },
+  "portlet": {
+    "com.liferay.portlet.display-category": "category.sample",
+    "com.liferay.portlet.header-portlet-css": "/css/styles.css",
+    "com.liferay.portlet.instanceable": true,
+    "javax.portlet.name": "perfilportalservidorreactwidget",
+    "javax.portlet.security-role-ref": "power-user,user",
+    "javax.portlet.resource-bundle": "content.Language"
+  },
+  "scripts": {
+    "build": "liferay build",
+    "clean": "liferay clean",
+    "deploy": "liferay deploy"
+  }
+}

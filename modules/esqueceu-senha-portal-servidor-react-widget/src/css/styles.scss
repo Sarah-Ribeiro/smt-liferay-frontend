@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+ font-family: 'Montserrat';
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.bg-esqueceu_a_senha {
+   background-image: url("/documents/d/guest/background-santa-maria-1-1-png");
+
+   /* Full height */
+   min-height: 100vh;
+
+   /* Center and scale the image nicely */
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+
+@media (max-width: 848px) {
+  .smt_esqueceu_a_senha_formulario_portal_do_servidor {
+    width: 100% !important;
+    padding: 2rem !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .smt_esqueceu_a_senha_logo_prefeitura_ajuda_portal_do_servidor {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+   gap: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .smt_esqueceu_a_senha_formulario_portal_do_servidor {
+    width: 100% !important;
+    padding: 1rem !important;
+  }
+
+  .smt_esqueceu_a_senha_portal_do_servidor {
+    padding: 1rem !important;
+  }
+
+  .smt_esqueceu_a_senha_logo_prefeitura_ajuda_portal_do_servidor {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     gap: 20px;
+    }
+}
+
