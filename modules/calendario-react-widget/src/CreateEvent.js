@@ -16,46 +16,54 @@ export default function CreateEvent() {
 
   const utilizer = localStorage.getItem("utilizer");
   const email = localStorage.getItem("email");
+  const id = localStorage.getItem("id");
   console.log(email);
+  console.log(id);
+
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Usuário não autenticado. Faça login novamente.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/v1/auth/me/${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erro ao buscar dados do usuário.");
+      }
+
+      const userData = await response.json();
+      setUser(userData);
+
+      setNewEvent((prevEvent) => ({
+        ...prevEvent,
+        author: userData.name,
+      }));
+    } catch (error) {
+      console.error("Erro ao buscar usuário:", error);
+      alert("Erro ao carregar dados do usuário.");
+    }
+  };
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        alert("Usuário não autenticado. Faça login novamente.");
-        return;
-      }
-
-      try {
-        const response = await fetch(
-          `http://localhost:8000/api/v1/auth/me/${utilizer}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Erro ao buscar dados do usuário.");
-        }
-
-        const userData = await response.json();
-        setUser(userData);
-
-        setNewEvent((prevEvent) => ({
-          ...prevEvent,
-          author: userData.name,
-        }));
-      } catch (error) {
-        console.error("Erro ao buscar usuário:", error);
-        alert("Erro ao carregar dados do usuário.");
-      }
-    };
-
-    fetchUserData();
+    const userName = localStorage.getItem("utilizer");
+    if (userName) {
+      setNewEvent((prev) => ({
+        ...prev,
+        author: userName,
+      }));
+    }
   }, []);
 
   const handleInputChange = (e) => {

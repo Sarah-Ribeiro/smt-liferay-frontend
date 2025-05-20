@@ -16,6 +16,7 @@ export default function EventManager() {
 
   const token = localStorage.getItem("token");
   const utilizer = localStorage.getItem("utilizer");
+  const id = localStorage.getItem("id");
 
   // Busca dados do usuário
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function EventManager() {
       }
 
       try {
-        const response = await fetch(`http://localhost:8000/api/v1/auth/me/${utilizer}`, {
+        const response = await fetch(`http://localhost:8000/api/v1/auth/me/${id}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

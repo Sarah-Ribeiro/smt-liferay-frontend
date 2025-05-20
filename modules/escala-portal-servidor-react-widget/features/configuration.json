@@ -1,8 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/liferay/liferay-frontend-projects/master/maintenance/projects/js-toolkit/resources/schemas/configuration.schema.json",
   "system": {
-    "category": "abrir-demandas-react-widget",
-    "name": "abrir-demandas-react-widget",
+    "category": "escala-portal-servidor-react-widget",
+    "name": "escala-portal-servidor-react-widget",
     "fields": {
       "fruit": {
         "default": "orange",

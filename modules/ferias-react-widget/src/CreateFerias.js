@@ -17,6 +17,7 @@ export default function CreateFerias() {
 
   const utilizer = localStorage.getItem("utilizer");
   const email = localStorage.getItem("email");
+  const id = localStorage.getItem("id");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -29,7 +30,7 @@ export default function CreateFerias() {
 
       try {
         const response = await fetch(
-          `http://localhost:8000/api/v1/auth/me/${utilizer}`,
+          `http://localhost:8000/api/v1/auth/me/${id}`,
           {
             method: "GET",
             headers: {

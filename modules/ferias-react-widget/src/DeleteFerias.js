@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
 
-export default function DeleteFerias() {
-  const [newEvent, setNewEvent] = useState({
-    title: "",
-    author: "",
-    start: "",
-    end: "",
-    color: "#3174ad",
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [events, setEvents] = useState([]);
+export default function DeleteHolidays() {
+  const [holidays, setHolidays] = useState([]);
   const [user, setUser] = useState(null);
 
   const token = localStorage.getItem("token");
   const utilizer = localStorage.getItem("utilizer");
+  const id = localStorage.getItem("id");
 
-  // Busca dados do usuário
+  // Buscar dados do usuário
   useEffect(() => {
     const fetchUserData = async () => {
       if (!token) {
@@ -26,24 +17,17 @@ export default function DeleteFerias() {
       }
 
       try {
-        const response = await fetch(`http://localhost:8000/api/v1/auth/me/${utilizer}`, {
+        const response = await fetch(`http://localhost:8000/api/v1/auth/me/${id}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        if (!response.ok) {
-          throw new Error("Erro ao buscar dados do usuário.");
-        }
+        if (!response.ok) throw new Error("Erro ao buscar dados do usuário.");
 
         const userData = await response.json();
         setUser(userData);
-
-        setNewEvent((prevEvent) => ({
-          ...prevEvent,
-          author: userData.name,
-        }));
       } catch (error) {
         console.error("Erro ao buscar usuário:", error);
         alert("Erro ao carregar dados do usuário.");
@@ -51,105 +35,71 @@ export default function DeleteFerias() {
     };
 
     fetchUserData();
-  }, []);
+  }, [id, token]);
 
-  // Busca lista de ferias
+  // Buscar lista de ferias
   useEffect(() => {
-    const fetchEvents = async () => {
+    const fetchHolidays = async () => {
       try {
         const response = await fetch("http://localhost:8002/api/ferias", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+
+        if (!response.ok) throw new Error("Erro ao buscar ferias.");
+
         const data = await response.json();
-        setEvents(data);
+        setHolidays(data);
       } catch (err) {
-        console.error("Erro ao carregar ferias", err);
+        console.error("Erro ao carregar ferias:", err);
+        alert("Erro ao carregar ferias.");
       }
     };
 
-    fetchEvents();
-  }, []);
+    fetchHolidays();
+  }, [token]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewEvent({ ...newEvent, [name]: value });
-  };
-
-  const handleCreateEvent = async () => {
-    if (isSubmitting) return;
-    setIsSubmitting(true);
-
+  // Deletar feriado
+  const handleDeleteHoliday = async (holidayId) => {
     try {
-      const startDateTime = moment(newEvent.start).toISOString();
-      const endDateTime = moment(newEvent.end).toISOString();
-
-      const titleFormatted = `${newEvent.title}\n${newEvent.author}\n${moment(
-        startDateTime
-      ).format("DD/MM/YYYY HH:mm")} - ${moment(endDateTime).format("DD/MM/YYYY HH:mm")}`;
-
-      const eventPayload = {
-        ...newEvent,
-        title: titleFormatted,
-        start: startDateTime,
-        end: endDateTime,
-      };
-
-      const response = await fetch("http://localhost:8002/api/ferias", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(eventPayload),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Erro ao adicionar ferias.");
-      }
-
-      const createdEvent = await response.json();
-      setEvents([...events, createdEvent]);
-      alert("Ferias adicionada com sucesso!");
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleDeleteEvent = async (feriasId) => {
-    try {
-      const response = await fetch(`http://localhost:8002/api/ferias/${feriasId}`, {
+      const response = await fetch(`http://localhost:8002/api/ferias/${holidayId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      if (!response.ok) throw new Error("Um usuario comum nao pode deletar um a ferias de outro usuario");
+      if (!response.ok) {
+        throw new Error("Erro ao deletar feriado. Verifique suas permissões.");
+      }
 
-      setEvents(events.filter((event) => event.id !== feriasId));
-      alert("Ferias deletada com sucesso.");
+      setHolidays((prev) => prev.filter((holiday) => holiday.feriasId !== holidayId));
+      console.log(`Deletado: http://localhost:8002/api/ferias/${holidayId}`);
+      alert("Feriado deletado com sucesso.");
     } catch (error) {
+      console.error("Erro ao deletar feriado:", error);
       alert(error.message);
     }
   };
 
   return (
     <div className="container my-5">
-      <h2 className="mb-4">Gerenciador de Ferias</h2>
-
+      <h2 className="mb-4">Gerenciador de ferias</h2>
       <hr />
 
-      <h4 className="mt-4">Lista de Ferias</h4>
+      <h4 className="mt-4">Lista de ferias</h4>
       <ul className="list-group">
-        {events.map((event) => (
-          <li key={event.id} className="list-group-item d-flex justify-content-between align-items-center">
-            <span style={{ whiteSpace: "pre-line" }}>{event.title}</span>
-            <button onClick={() => handleDeleteEvent(event.id)} className="btn btn-danger btn-sm">
+        {holidays.map((holiday) => (
+          <li
+            key={holiday.id}
+            className="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <span style={{ whiteSpace: "pre-line" }}>{holiday.title}</span>
+            <button
+              onClick={() => handleDeleteHoliday(holiday.feriasId)}
+              className="btn btn-danger btn-sm"
+            >
               Deletar
             </button>
           </li>

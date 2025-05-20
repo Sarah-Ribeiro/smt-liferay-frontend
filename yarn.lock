@@ -4214,6 +4214,16 @@ es-set-tostringtag@^2.1.0:
     has-tostringtag "^1.0.2"
     hasown "^2.0.2"
 
+"escala-portal-servidor-react-widget@file:C:\\Users\\cogol\\IdeaProjects\\santa-maria-liferay-teste\\modules\\escala-portal-servidor-react-widget":
+  version "1.0.0"
+  resolved "file:modules/escala-portal-servidor-react-widget"
+  dependencies:
+    "@liferay/dxp-7.4" "*"
+    moment "^2.30.1"
+    moment-timezone "^0.5.48"
+    react-big-calendar "^1.18.0"
+    react-router-dom "^5.3.4"
+
 escalade@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/escalade/-/escalade-3.2.0.tgz"
@@ -5016,6 +5026,11 @@ isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz"
   integrity sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==
+
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz"
+  integrity sha512-D2S+3GLxWH+uhrNEcoh/fnmYeP8E8/zHl644d/jdA0g2uyXvy3sb0qxotE+ne0LtccHknQzWwZEzhak7oJ0COQ==
 
 isexe@^2.0.0:
   version "2.0.0"

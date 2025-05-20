@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './css/styles.scss';
 
-import AbrirDemandasComponent from './AbrirDemandasComponent';
+import EscalaComponent from './EscalaComponent';
 
 export default function main(params) { 
 	 ReactDOM.render(
-		<AbrirDemandasComponent />, 
+		<EscalaComponent />, 
 		document.getElementById(params.portletElementId)
 	);
 }

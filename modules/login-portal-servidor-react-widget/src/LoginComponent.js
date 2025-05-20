@@ -28,7 +28,7 @@ export default function LoginComponent() {
       );
 
       if (response.status === 200 && response.data?.token) {
-        const { token, matricula, utilizer, role, email, cpf, fullName } = response.data;
+        const { token, matricula, utilizer, role, email, cpf, fullName, id } = response.data;
 
         localStorage.setItem("token", token);
         localStorage.setItem("matricula", matricula);
@@ -37,6 +37,7 @@ export default function LoginComponent() {
         localStorage.setItem("email", email);
         localStorage.setItem("cpf", cpf);
         localStorage.setItem("fullName", fullName);
+        localStorage.setItem("id", id);
 
         window.location.href = "/web/portal-do-servidor";
       } else {
@@ -53,7 +54,8 @@ export default function LoginComponent() {
       <div className="d-flex justify-content-between p-3 smt_login_logo_prefeitura_ajuda_portal_do_servidor">
         <a href="/home">
           <img
-            src="/documents/d/guest/logo-prefeitura-1"
+            src="/documents/d/guest/imagem_gerada-1-png"
+            width={200}
             alt="Logo Prefeitura"
           />
         </a>
@@ -62,16 +64,15 @@ export default function LoginComponent() {
         </a>
       </div>
 
-      <div className="d-flex flex-column justify-content-end align-items-end p-5">
+      <div className="d-flex flex-column justify-content-center align-items-center">
+        <h1 style={{ fontSize: "40px" }} className="text-center py-2">Portal do Servidor</h1>
         <div
-          className="bg-white p-5 w-50 smt_login_formulario_portal_do_servidor"
+          className="bg-white p-5 w-25 smt_login_formulario_portal_do_servidor p-5"
           style={{
-            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)", 
             borderRadius: "40px",
           }}
         >
-          <h2 className="text-center py-2">Portal do Servidor</h2>
-
           <form onSubmit={handleLogin}>
             <div className="form-group mb-3">
               <input
@@ -103,9 +104,9 @@ export default function LoginComponent() {
               Entrar
             </button>
 
-            <div className="d-flex flex-column my-3" style={{ gap: "20px" }}>
+            <div className="d-flex flex-column mt-3" style={{ gap: "20px" }}>
               <a
-                className="text-decoration-none text-end"
+                className="text-dark text-center"
                 style={{ color: "#1F3D4B" }}
                 href="/esqueceu-a-senha"
               >

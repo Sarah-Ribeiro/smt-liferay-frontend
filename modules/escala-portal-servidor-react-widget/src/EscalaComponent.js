@@ -6,14 +6,22 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);
 
-export default function FeriasComponent() {
+export default function EscalaComponent() {
   const history = useHistory();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
   const utilizer = localStorage.getItem("utilizer");
-  const role = localStorage.getItem("role"); // Recupera a role diretamente do localStorage
+  const role = localStorage.getItem("role");
+
+  const users = [
+    { id: 1, title: "João" },
+    { id: 2, title: "Maria" },
+    { id: 3, title: "José" },
+    { id: 4, title: "Ana" },
+    { id: 5, title: "Carlos" },
+  ];
 
   const fetchEvents = async () => {
     setLoading(true);
@@ -23,7 +31,7 @@ export default function FeriasComponent() {
         return;
       }
 
-      const response = await fetch("http://localhost:8002/api/ferias", {
+      const response = await fetch("http://localhost:8001/api/events", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -44,14 +52,11 @@ export default function FeriasComponent() {
                 : new Date(),
             end:
               endDate instanceof Date && !isNaN(endDate) ? endDate : new Date(),
-            title: `Férias - ${utilizer} | ${moment(startDate).format(
-              "DD/MM/YYYY"
-            )} - ${moment(endDate).format("DD/MM/YYYY")}`,
           };
         });
         setEvents(formatted);
       } else {
-        console.error("Erro ao buscar ferias: ", response.statusText);
+        console.error("Erro ao buscar eventos: ", response.statusText);
       }
     } catch (error) {
       console.error("Erro ao fazer requisição:", error);
@@ -61,7 +66,7 @@ export default function FeriasComponent() {
   };
 
   useEffect(() => {
-    fetchEvents(); // Carrega ferias
+    fetchEvents(); // Carrega eventos
   }, []);
 
   return (
@@ -69,45 +74,62 @@ export default function FeriasComponent() {
       <div className="d-flex flex-row align-items-center">
         <button
           className="btn btn-primary ml-5"
-          onClick={() => history.push("/adicionar-ferias")}
+          onClick={() => history.push("/criar-evento")}
         >
-          Adicionar Ferias
+          Criar Evento
         </button>
         <button
           className="btn btn-danger ml-5"
-          onClick={() => history.push("/deletar-ferias")}
+          onClick={() => history.push("/deletar-evento")}
           disabled={role?.toUpperCase().trim() !== "ADMIN"} // Verificação mais robusta
           title={
             role.trim() !== "ADMIN"
-              ? "Apenas administradores podem gerenciar as ferias"
+              ? "Apenas administradores podem deletar eventos"
               : ""
           }
         >
-          Deletar Ferias
+          Deletar Evento
         </button>
       </div>
 
-      {loading ? (
-        <p>Carregando todas as ferias...</p>
-      ) : (
-        <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          titleAccessor="title" // <-- importante!
-          tooltipAccessor="title"
-          style={{ height: 500, margin: "50px" }}
-          eventPropGetter={(event) => ({
-            style: {
-              backgroundColor: event.color || "#3174ad",
-              color: "white",
-              borderRadius: "5px",
-              padding: "4px",
-            },
-          })}
-        />
-      )}
+      <div style={{ flex: 1 }}>
+        {loading ? (
+          <p>Carregando eventos...</p>
+        ) : (
+          <Calendar
+            localizer={localizer}
+            events={events}
+            startAccessor="start"
+            endAccessor="end"
+            defaultView="week"
+            style={{ height: 500, margin: "50px" }}
+            selectable
+            onSelectEvent={(slotInfo) => {
+              const title = window.prompt("Título do evento:");
+              if (title && slotInfo.resourceId) {
+                setEvents([
+                  ...events,
+                  {
+                    title,
+                    start: slotInfo.start,
+                    end: slotInfo.end,
+                    color: "#3174ad",
+                    resourceId: slotInfo.resourceId,
+                  },
+                ]);
+              }
+            }}
+            eventPropGetter={(event) => ({
+              style: {
+                backgroundColor: event.color || "#3174ad",
+                color: "white",
+                borderRadius: "5px",
+                padding: "4px",
+              },
+            })}
+          />
+        )}
+      </div>
     </div>
   );
 }
