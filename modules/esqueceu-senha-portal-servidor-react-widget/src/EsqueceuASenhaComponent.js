@@ -46,25 +46,25 @@ export default function EsqueceuASenhaComponent(props) {
       <div className="d-flex justify-content-between p-3 smt_esqueceu_a_senha_logo_prefeitura_ajuda_portal_do_servidor">
         <a href="/home">
           <img
-            src="/documents/d/guest/logo-prefeitura-1"
+            src="/documents/d/guest/imagem_gerada-1-png"
+            width={200}
             alt="Logo Prefeitura"
           />
         </a>
-        <a href="/ajuda" className="text-decoration-none fs-4 text-dark">
+        <a href="/ajuda" className="text-decoration-none text-dark">
           Ajuda
         </a>
       </div>
 
-      <div className="d-flex flex-column justify-content-end align-items-end p-5">
+      <div className="d-flex flex-column justify-content-center align-items-center">
+        <h1 style={{ fontSize: "36px" }} className="text-center py-2">Portal do Servidor</h1>
         <div
           className="bg-white p-5 w-50 smt_esqueceu_a_senha_formulario_portal_do_servidor"
           style={{
             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
-            borderRadius: "40px",
+            borderRadius: "10px",
           }}
         >
-          <h2 className="text-center py-2">Portal do Servidor</h2>
-
           <form onSubmit={handleEsqueceuASenha}>
             <div className="form-group mb-3">
               <input

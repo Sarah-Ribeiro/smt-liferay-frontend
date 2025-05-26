@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "Escala Portal Servidor React Widget",
   "dependencies": {
-    "@liferay/dxp-7.4": "*", 
+    "@liferay/portal-7.4": "*",
     "moment": "^2.30.1",
-    "moment-timezone": "^0.5.48",
-    "react-big-calendar": "^1.18.0",
+    "react-big-calendar": "^0.28.0",
     "react-router-dom": "^5.3.4"
   },
   "portlet": {

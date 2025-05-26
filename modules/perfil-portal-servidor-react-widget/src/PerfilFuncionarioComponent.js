@@ -59,34 +59,35 @@ export default function PerfilFuncionarioComponent() {
   const isAdmin = role?.toUpperCase().trim() === "ADMIN";
 
   return (
-    <div className="container pt-5 w-100">
-      <div className="d-flex flex-column align-items-center">
-        <button
-          className="text-decoration-none"
-          onClick={handleClickProfile}
-          style={{ background: "transparent", border: "none" }}
-        >
-          <img
-            width="100"
-            height="100"
-            src="/documents/d/portal-do-servidor/user-solid"
-            alt="Ícone do usuário"
-          />
-        </button>
+    <div className="container py-5 w-100">
+      <div className="d-flex flex-column align-items-end justify-content-end">
+        <div className="d-flex flex-column">
+          <button
+            className="text-decoration-none"
+            onClick={handleClickProfile}
+            style={{ background: "transparent", border: "none" }}
+          >
+            <img
+              width="100"
+              height="100"
+              src="/documents/d/portal-do-servidor/user-solid"
+              alt="Ícone do usuário"
+            />
+          </button>
 
-        <div className="d-flex flex-column mt-3">
-          <strong className="text-center">{userName}</strong>
-          <span className="text-center">{matricula}</span>
+          <div className="d-flex flex-column mt-3">
+            <strong className="text-center">{userName}</strong>
+            <span className="text-center">{matricula}</span>
+          </div>
+          {isAdmin && (
+                      <button
+                        className="btn btn-danger my-3"
+                        onClick={handleRegisterClick}
+                      >
+                        Criar um novo usuário
+                      </button>
+                    )}
         </div>
-
-        <button
-          className="btn btn-danger my-3"
-          onClick={handleRegisterClick}
-          disabled={!isAdmin}
-          title={!isAdmin ? "Apenas administradores podem criar novos usuários." : ""}
-        >
-          Registrar um novo usuário
-        </button>
 
         {error && <p className="text-danger mt-3">{error}</p>}
       </div>

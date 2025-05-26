@@ -49,7 +49,8 @@ export default function CadastroComponent() {
       <div className="d-flex justify-content-between p-3 smt_cadastro_logo_prefeitura_ajuda_portal_do_servidor">
         <a href="/home">
           <img
-            src="/documents/d/guest/logo-prefeitura-1"
+            src="/documents/d/guest/imagem_gerada-1-png"
+            width={200}
             alt="Logo Prefeitura"
           />
         </a>
@@ -62,15 +63,15 @@ export default function CadastroComponent() {
         </a>
       </div>
 
-      <div className="d-flex flex-column justify-content-end align-items-end p-5">
+      <div className="d-flex flex-column justify-content-center align-items-center">
+        <h1 style={{ fontSize: "36px" }} className="text-center py-2 smt_cadastro_titulo_portal_do_servidor">Portal do Servidor</h1>
         <div
           className="bg-white p-5 w-50 smt_cadastro_formulario_portal_do_servidor"
           style={{
             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
-            borderRadius: "40px",
+            borderRadius: "10px",
           }}
         >
-          <h2 className="text-center py-2">Portal do Servidor</h2>
           <form onSubmit={handleRegister}>
             <div className="form-group">
               <input
@@ -102,7 +103,7 @@ export default function CadastroComponent() {
                 required
               />
             </div>
-            {error && <p style={{ color: "red" }}>{error}</p>} 
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <button
               type="submit"
               className="btn btn-danger text-white w-100 p-2"

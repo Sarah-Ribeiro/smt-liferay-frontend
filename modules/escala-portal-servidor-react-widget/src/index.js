@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import EscalaComponent from './EscalaComponent';
+import EscalaPortlet from "./EscalaPortlet";
 
-export default function main(params) { 
-	 ReactDOM.render(
-		<EscalaComponent />, 
-		document.getElementById(params.portletElementId)
-	);
+export default function main(params) {
+  ReactDOM.render(
+    <EscalaPortlet />,
+    document.getElementById(params.portletElementId)
+  );
 }

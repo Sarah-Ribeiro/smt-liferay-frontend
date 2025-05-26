@@ -16,9 +16,8 @@ export default function CreateEvent() {
 
   const utilizer = localStorage.getItem("utilizer");
   const email = localStorage.getItem("email");
-  const id = localStorage.getItem("id");
+  const userId = parseInt(localStorage.getItem("userId"));
   console.log(email);
-  console.log(id);
 
   const fetchUserData = async () => {
     const token = localStorage.getItem("token");
@@ -30,7 +29,7 @@ export default function CreateEvent() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/auth/me/${id}`,
+        `http://localhost:8000/api/v1/auth/me/${userId}`,
         {
           method: "GET",
           headers: {
@@ -115,8 +114,15 @@ export default function CreateEvent() {
 
     setIsSubmitting(true);
     try {
-      const startDateTime = moment(newEvent.start).toISOString();
-      const endDateTime = moment(newEvent.end).toISOString();
+      let startDateTime, endDateTime;
+
+      if (newEvent.allDay) {
+       startDateTime = moment(newEvent.start).startOf("day").toISOString();
+        endDateTime = moment(newEvent.end).endOf("day").toISOString();
+      } else {
+       startDateTime = moment(newEvent.start).toISOString();
+        endDateTime = moment(newEvent.end).toISOString();
+      }
 
       const titleFormatted = `${newEvent.title} | ${utilizer} | ${moment(
         startDateTime
@@ -129,6 +135,7 @@ export default function CreateEvent() {
         title: titleFormatted,
         start: startDateTime,
         end: endDateTime,
+        userId: userId,
       };
 
       const token = localStorage.getItem("token");

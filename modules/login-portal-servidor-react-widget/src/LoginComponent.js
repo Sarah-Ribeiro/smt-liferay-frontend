@@ -28,7 +28,7 @@ export default function LoginComponent() {
       );
 
       if (response.status === 200 && response.data?.token) {
-        const { token, matricula, utilizer, role, email, cpf, fullName, id } = response.data;
+        const { token, matricula, utilizer, role, email, cpf, fullName, userId } = response.data;
 
         localStorage.setItem("token", token);
         localStorage.setItem("matricula", matricula);
@@ -37,7 +37,7 @@ export default function LoginComponent() {
         localStorage.setItem("email", email);
         localStorage.setItem("cpf", cpf);
         localStorage.setItem("fullName", fullName);
-        localStorage.setItem("id", id);
+        localStorage.setItem("userId", userId);
 
         window.location.href = "/web/portal-do-servidor";
       } else {
@@ -65,12 +65,12 @@ export default function LoginComponent() {
       </div>
 
       <div className="d-flex flex-column justify-content-center align-items-center">
-        <h1 style={{ fontSize: "40px" }} className="text-center py-2">Portal do Servidor</h1>
+        <h1 style={{ fontSize: "36px" }} className="text-center py-2">Portal do Servidor</h1>
         <div
           className="bg-white p-5 w-25 smt_login_formulario_portal_do_servidor p-5"
           style={{
             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)", 
-            borderRadius: "40px",
+            borderRadius: "20px",
           }}
         >
           <form onSubmit={handleLogin}>

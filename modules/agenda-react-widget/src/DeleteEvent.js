@@ -123,22 +123,22 @@ export default function EventManager() {
   };
 
   const handleDeleteEvent = async (eventId) => {
-    try {
-      const response = await fetch(`http://localhost:8001/api/events/${eventId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        try {
+          const response = await fetch(`http://localhost:8001/api/events/${eventId}`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-      if (!response.ok) throw new Error("Um usuario comum nao pode deletar um evento");
+          if (!response.ok) throw new Error("Um usuario comum nao pode deletar um evento");
 
-      setEvents(events.filter((event) => event.id !== eventId));
-      alert("Evento deletado com sucesso.");
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+          setEvents(events.filter((event) => event.id !== eventId));
+          alert("Evento deletado com sucesso.");
+        } catch (error) {
+          alert(error.message);
+        }
+      };
 
   return (
     <div className="container my-5">

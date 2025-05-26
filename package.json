@@ -3,11 +3,10 @@
     "workspaces": {
         "packages": [
             "modules\\admin-react-widget",
+            "modules\\agenda-react-widget",
             "modules\\cadastro-portal-servidor-react-widget",
-            "modules\\calendario-react-widget",
             "modules\\escala-portal-servidor-react-widget",
             "modules\\esqueceu-senha-portal-servidor-react-widget",
-            "modules\\ferias-react-widget",
             "modules\\informacoes-perfil-portal-servidor-widget",
             "modules\\login-portal-servidor-react-widget",
             "modules\\perfil-portal-servidor-react-widget"

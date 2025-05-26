@@ -6,14 +6,21 @@ export default function InformacoesUsuario() {
   const matricula = localStorage.getItem("matricula");
 
   return (
-    <div className="container">
-      <h2>Informações do Usuário</h2>
-      <p>
-        <strong>Senha:</strong> {senha}
-      </p>
-      <p>
-        <strong>Matrícula:</strong> {matricula}
-      </p>
+    <div className="container my-5">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Matrícula</th>
+            <th>Senha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>{matricula}</th>
+            <td>{senha}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
